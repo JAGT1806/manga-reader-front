@@ -1,0 +1,18 @@
+<main class="container">
+    <h1 class="text-center mb-5">{{ 'HOME.TITLE' | translate }}</h1>
+
+    <app-pagination [currentPage]="currentPage" [totalPages]="totalPages" (pageChange)="onPageChange($event)" />
+
+    <div class="row ">
+        <div *ngFor="let manga of mangas" class="col-md-4 mb-4 d-flex align-items-stretch">
+            <app-manga-card [manga]="manga" />
+        </div>
+    </div>
+
+    <div *ngIf="noResults" class="text-center">
+        <img src="https://i.ibb.co/Lr13MHx/manga-no-encontrado-con-un-personaje-de-anume-chibi.jpg" alt="No Manga Found" class="mb-3 img-fluid" />
+    </div>
+
+    <app-pagination [currentPage]="currentPage" [totalPages]="totalPages" (pageChange)="onPageChange($event)" />
+  
+</main>

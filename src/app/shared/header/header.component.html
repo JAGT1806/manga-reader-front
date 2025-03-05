@@ -1,0 +1,141 @@
+<nav class="navbar bg-body-tertiary fixed-top">
+  <div class="container-fluid">
+    <!-- Logo y título -->
+    <div class="d-flex logo">
+      <a class="nav-link offcanvas-header" [routerLink]="['/', selectedLanguage(), 'home']" [queryParams]="{page: 1}">
+        <img src="/assets/img/logo.png" alt="Icon" width="80" height="80">
+        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Manga World</h5>
+      </a>
+    </div>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+      aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Menú lateral (Offcanvas) -->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+      <div class="offcanvas-header">
+        <img src="/assets/img/logo.png" alt="Icon" width="80" height="80">
+        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Manga World</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <hr>
+      <div class="offcanvas-body">
+        <!-- Barra de búsqueda -->
+        <div class="search-container">
+          <form class="d-flex" (ngSubmit)="onSearch($event)">
+            <div class="input-group">
+              <input [(ngModel)]="searchQuery" name="search" class="form-control" type="search" [placeholder]="'SEARCH.MANGA' | translate"
+                aria-label="Search">
+              <button class="btn btn-outline-success" type="submit">{{ 'SEARCH' | translate }}</button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Configuración -->
+        <div class="settings-section">
+          <h6 class="sidebar-heading d-flex justify-content-between align-items-center mb-3 text-muted">
+            <span>{{'SETTINGS' | translate}}</span>
+          </h6>
+          <div class="form-check form-switch mb-2">
+            <input class="form-check-input" type="checkbox" [checked]="settings().dataSaver" (change)="toggleDataSaver()"
+              id="dataSaverSwitch">
+            <label class="form-check-label" for="dataSaverSwitch">{{ 'DATA.SAVER.MODE' | translate}}</label>
+          </div>
+          <div class="form-check form-switch mb-2">
+            <input class="form-check-input" type="checkbox" [checked]="settings().nsfw" (change)="toggleNSFW()"
+              id="nsfwSwitch">
+            <label class="form-check-label" for="nsfwSwitch">{{ 'SHOW.NSFW' | translate}}</label>
+          </div>
+          <div class="form-check form-switch mb-2">
+            <input class="form-check-input" type="checkbox" [checked]="settings().theme === 'dark'"
+              (change)="toggleTheme()" id="themeSwitch">
+            <label class="form-check-label" for="themeSwitch">{{ 'DARK.MODE' | translate}}</label>
+          </div>
+        </div>
+        
+        <!-- Selector de idioma -->
+        <div class="dropdown mb-3">
+          <button 
+            class="btn btn-secondary dropdown-toggle" 
+            type="button" 
+            id="languageDropdown" 
+            data-bs-toggle="dropdown" 
+            aria-expanded="false"
+          >
+            {{ currentLanguage === Language.EN ? ('ENGLISH' | translate) : 
+               currentLanguage === Language.ES ? ('SPANISH' | translate) : 
+               ('FRENCH' | translate) }}
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="languageDropdown">
+            <li>
+              <button class="dropdown-item" (click)="changeLanguage(Language.EN)">
+                {{ 'ENGLISH' | translate }}
+              </button>
+            </li>
+            <li>
+              <button class="dropdown-item" (click)="changeLanguage(Language.ES)">
+                {{ 'SPANISH' | translate }}
+              </button>
+            </li>
+            <li>
+              <button class="dropdown-item" (click)="changeLanguage(Language.FR)">
+                {{ 'FRENCH' | translate }}
+              </button>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Área de usuario -->
+        <div class="user-area">
+          <div class="dropdown dropup">
+            <a class="user-icon" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <img src="/assets/img/R.png"
+                alt="Icon-User" width="30" height="30" class="d-inline-block align-text-top">
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end user-dropdown">
+              <!-- Menú para usuarios no autenticados -->
+              <ng-container *ngIf="!currentUser()">
+                <li><a class="dropdown-item" [routerLink]="['/', selectedLanguage(), 'auth']" routerLinkActive="active">{{ 'LOGIN' | translate }}</a></li>
+              </ng-container>
+
+              <!-- Menú para usuarios autenticados -->
+              <ng-container *ngIf="currentUser()">
+                <li>
+                  <div class="dropdown-header">
+                    <strong>{{ currentUser()?.user?.username }}</strong>
+                    <br>
+                    <small class="text-muted">{{ currentUser()?.user?.email }}</small>
+                  </div>
+                </li>
+                <li><hr class="dropdown-divider"></li>
+                <li>
+                  <a class="dropdown-item" [routerLink]="['/', selectedLanguage(), 'profile']" routerLinkActive="active">
+                    <i class="bi bi-person-circle me-2"></i>{{"MY.PROFILE" | translate}} 
+                  </a>
+                </li>
+                <li *ngIf="isAdmin1()">
+                  <a class="dropdown-item" [routerLink]="['/', selectedLanguage(), 'dashboard']" routerLinkActive="active">
+                    <i class="bi bi-gear me-2"></i>{{'DASHBOARD' | translate}}
+                  </a>
+                </li>
+                <li><hr class="dropdown-divider"></li>
+                <li>
+                  <a class="dropdown-item" [routerLink]="['/', selectedLanguage(), 'favorites']" routerLinkActive="active">
+                    <i class="bi bi-heart me-2"></i>{{'FAVORITES' | translate}}
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item text-danger" href="#" (click)="$event.preventDefault(); onLogout()">
+                    <i class="bi bi-box-arrow-right me-2"></i>{{'LOGOUT' | translate}}
+                  </a>
+                </li>
+              </ng-container>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,93 @@
+
+
+.offcanvas-body {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    height: 100%;
+}
+
+.navbar-nav {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.nav-item {
+    margin: 0.5rem 0;
+}
+
+/* Contenedor para el área de usuario */
+.user-area {
+    position: relative;
+    margin-top: auto;
+    padding: 1rem;
+    text-align: right;
+}
+
+/* Estilo para el dropdown del usuario */
+.user-dropdown {
+    position: absolute;
+    bottom: 100%;
+    right: 0;
+    margin-bottom: 0.5rem;
+}
+
+/* Ajuste para el ícono de usuario */
+.user-icon {
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 50%;
+    transition: background-color 0.3s;
+    text-align: right;
+}
+
+.user-icon:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo para la barra de búsqueda */
+.search-container {
+    width: 100%;
+    padding: 0 1rem;
+    margin-bottom: 1rem;
+}
+
+/* Configuración */
+.settings-section {
+    padding: 1rem;
+    border-top: 1px solid #dee2e6;
+    width: 100%;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+}
+
+.logo img {
+    margin-right: 1rem;
+}
+
+/* Ajuste para el dropdown del usuario */
+.user-dropdown {
+    position: absolute;
+    bottom: 100%;
+    /* Esto asegura que se despliegue hacia arriba */
+    right: 0;
+    margin-bottom: 0.5rem;
+    z-index: 1050;
+    /* Asegura que el dropdown esté sobre otros elementos */
+}
+
+.user-icon {
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 50%;
+    transition: background-color 0.3s;
+}
+
+.user-icon:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}

@@ -1,0 +1,64 @@
+<nav aria-label="Page navigation" class="d-flex justify-content-center">
+    <ul class="pagination">
+      <!-- Botón Anterior -->
+      <li class="page-item" [class.disabled]="currentPage === 1">
+        <a class="page-link" (click)="onPageChange(currentPage - 1)" [class.disabled]="currentPage === 1">
+          <span aria-hidden="true">&larr;</span>
+        </a>
+      </li>
+
+      <!-- Primera página -->
+      <li class="page-item" [class.active]="currentPage === 1">
+        <a class="page-link" (click)="onPageChange(1)">1</a>
+      </li>
+
+      <!-- Ellipsis inicial con input -->
+      <li class="page-item" *ngIf="showStartEllipsis">
+        <a class="page-link" (click)="toggleStartInput()" *ngIf="!showingStartInput">...</a>
+        <div class="page-input-container" *ngIf="showingStartInput">
+          <input type="number" 
+                 class="page-input" 
+                 [(ngModel)]="pageInput" 
+                 (keyup.enter)="goToPage()"
+                 (blur)="onInputBlur()"
+                 min="1"
+                 [max]="totalPages"
+                 #pageInputEl>
+        </div>
+      </li>
+
+      <!-- Páginas centrales -->
+      <ng-container *ngFor="let page of visiblePages">
+        <li class="page-item" [class.active]="currentPage === page" *ngIf="page !== 1 && page !== totalPages">
+          <a class="page-link" (click)="onPageChange(page)">{{page}}</a>
+        </li>
+      </ng-container>
+
+      <!-- Ellipsis final con input -->
+      <li class="page-item" *ngIf="showEndEllipsis">
+        <a class="page-link" (click)="toggleEndInput()" *ngIf="!showingEndInput">...</a>
+        <div class="page-input-container" *ngIf="showingEndInput">
+          <input type="number" 
+                 class="page-input" 
+                 [(ngModel)]="pageInput" 
+                 (keyup.enter)="goToPage()"
+                 (blur)="onInputBlur()"
+                 min="1"
+                 [max]="totalPages"
+                 #pageInputEl>
+        </div>
+      </li>
+
+      <!-- Última página -->
+      <li class="page-item" [class.active]="currentPage === totalPages" *ngIf="totalPages > 1">
+        <a class="page-link" (click)="onPageChange(totalPages)">{{totalPages}}</a>
+      </li>
+
+      <!-- Botón Siguiente -->
+      <li class="page-item" [class.disabled]="currentPage === totalPages">
+        <a class="page-link" (click)="onPageChange(currentPage + 1)" [class.disabled]="currentPage === totalPages">
+          <span aria-hidden="true">&rarr;</span>
+        </a>
+      </li>
+    </ul>
+  </nav>

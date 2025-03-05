@@ -1,0 +1,13 @@
+.language-switcher {
+    padding: 10px;
+    text-align: right;
+  }
+  .language-switcher button {
+    margin-left: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  .language-switcher button.active {
+    font-weight: bold;
+    background-color: #eee;
+  }
