@@ -38,9 +38,7 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     private router: Router
-  ) { 
-    const initialSettings = this.settingsService.getSettings();
-  }
+  ) { }
 
   selectedLanguage(): string {
     return this.currentLanguage
@@ -84,13 +82,14 @@ export class HeaderComponent implements OnInit {
   }
   
   changeLanguage(lang: Language): void {
-    // Actualizar la URL manteniendo la ruta actual
+    localStorage.setItem('selectedLanguage', lang);
+    this.languageService.setLanguage(lang);
     const urlSegments = this.router.url.split('/');
+    console.log(urlSegments);
     if (urlSegments.length > 1) {
       urlSegments[1] = lang;
       const newUrl = urlSegments.join('/');
       
-      // Navegar a la misma ruta pero con el nuevo idioma
       this.router.navigateByUrl(newUrl);
     }
   }

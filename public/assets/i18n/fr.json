@@ -8,11 +8,14 @@
     "HOME.TITLE": "Mangas les plus récents",
     "LOGIN": "Connexion",
     "LOGOUT": "Déconnexion",
+    "MANGAS.NULL": "Aucun manga trouvé pour: ",
     "MY.PROFILE" : "Mon profil",
     "READ.MORE": "Lire la suite",
+    "RESULT.TITLE": "Résultats de la recherche",
     "SEARCH": "Rechercher",
     "SEARCH.MANGA": "Rechercher un manga...",
     "SETTINGS": "Paramètres",
     "SHOW.NSFW": "Afficher les NSFW",
+    "SHOW.RESULTS": "Affichage des résultats pour: ",
     "SPANISH": "Espagnol"
 }

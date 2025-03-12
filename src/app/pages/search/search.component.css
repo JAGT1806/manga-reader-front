@@ -1,0 +1,19 @@
+.no-results {
+    margin-top: 50px;
+    color: #6c757d;
+}
+
+.no-results img {
+    width: 150px;
+    height: 150px;
+}
+  
+:host {
+    display: block;
+    min-height: 100vh;
+}
+
+.pagination {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}

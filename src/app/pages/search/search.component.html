@@ -1,0 +1,28 @@
+<main class="container mt-5">
+    <h1 class="text-center mb-5">{{"RESULT.TITLE" | translate}}</h1>
+    
+    <p *ngIf="searchQuery" >{{"SHOW.RESULTS" | translate}} <strong>{{ searchQuery }}</strong></p>
+  
+    <app-pagination 
+      [currentPage]="currentPage" 
+      [totalPages]="totalPages" 
+      (pageChange)="onPageChange($event)"
+      class="mb-4" />
+  
+    <div class="row">
+      <div *ngFor="let manga of mangas" class="col-md-4 mb-4 d-flex align-items-stretch">
+        <app-manga-card [manga]="manga" />
+      </div>
+    </div>
+  
+    <div *ngIf="noResults" class="text-center">
+      <img src="https://i.ibb.co/Lr13MHx/manga-no-encontrado-con-un-personaje-de-anume-chibi.jpg" alt="No Manga Found" class="mb-3 img-fluid" />
+      <p class="text-muted">{{"MANGAS.NULL" | translate}} "{{ searchQuery }}".</p>
+    </div>
+  
+    <app-pagination 
+      *ngIf="!noResults"
+      [currentPage]="currentPage" 
+      [totalPages]="totalPages" 
+      (pageChange)="onPageChange($event)" />
+  </main>

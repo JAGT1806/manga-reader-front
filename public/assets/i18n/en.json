@@ -8,11 +8,14 @@
     "HOME.TITLE": "Most recent mangas",
     "LOGIN": "Login",
     "LOGOUT": "Logout",
+    "MANGAS.NULL": "No mangas found for: ",
     "MY.PROFILE" : "My profile",
     "READ.MORE": "Read more",
+    "RESULT.TITLE": "Search results",
     "SEARCH": "Search",
     "SEARCH.MANGA": "Search manga...",
     "SETTINGS": "Settings",
     "SHOW.NSFW": "Show NSFW",
+    "SHOW.RESULTS": "Showing results for: ",
     "SPANISH": "Spanish"
 }

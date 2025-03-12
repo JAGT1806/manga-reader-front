@@ -9,6 +9,7 @@ import { Subscription } from 'rxjs';
 import { MangaService } from '../../core/services/manga.service';
 import { SettingsService } from '../../core/services/settings.service';
 import { UserSettings } from '../../models/interface/user.settings';
+import { LanguageService } from '../../core/services/language.service';
 
 @Component({
   selector: 'app-home',
@@ -39,6 +40,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     private router: Router,
     private route: ActivatedRoute,
     private mangaService: MangaService,
+    private langugaeService: LanguageService
   ) {}
 
   ngOnInit() {
@@ -63,6 +65,13 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.subscription.add(
       this.settingsService.settings$.subscribe(newSettings => {
         this.settings = newSettings;
+        if(this.currentPage <= this.maxPages)
+          this.loadMangas();
+      })
+    );
+
+    this.subscription.add(
+      this.langugaeService.currentLanguage$.subscribe(lang => {
         if(this.currentPage <= this.maxPages)
           this.loadMangas();
       })
