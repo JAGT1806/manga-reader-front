@@ -1,0 +1,92 @@
+
+<div class="container mt-4">
+    <!-- Sección de información del manga -->
+    <div class="row mb-4">
+      <div class="col-md-4 d-flex justify-content-center align-items-center position-relative">
+        <img *ngIf="manga" [src]="manga.coverUrl" class="img-fluid rounded shadow text-center" alt="Cover">
+        <button 
+        *ngIf="manga" 
+        class="btn btn-danger position-absolute top-0 end-0 m-2"
+        (click)="toggleFavorite()"
+        aria-label="Agregar o quitar de favoritos"
+      >
+        <i class="bi" [ngClass]="isFavorite ? 'bi-heart-fill' : 'bi-heart'"></i>
+      </button>
+      </div>
+      
+      
+      <div class="col-md-8">
+        <h2 class="mb-3">{{ manga?.title }}</h2>
+        <div class="card">
+          <div class="card-body">
+            <p class="card-text">
+              {{ manga?.description }}
+              <span *ngIf="!manga?.description">{{"DESCRIPTION.NULL" | translate}}</span>
+            </p>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+  
+    <!-- Loading spinner -->
+    <div *ngIf="loading" class="text-center my-4">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden" >Cargando...</span>
+      </div>
+      <p class="mt-2" >{{"CHAPTER.RELOAD" | translate}}</p>
+    </div>
+  
+    <!-- Acordeón de Capítulos -->
+    <div class="accordion mt-4" id="volumeAccordion"  *ngIf="!loading && volumes.length > 0">
+      <div class="accordion-item" *ngFor="let volume of volumes; let i = index">
+        <h2 class="accordion-header" [id]="'heading' + i">
+          <button 
+            class="accordion-button" 
+            type="button" 
+            [class.collapsed]="i !== 0"
+            data-bs-toggle="collapse" 
+            [attr.data-bs-target]="'#collapse' + i"
+            [attr.aria-expanded]="i === 0"
+            [attr.aria-controls]="'collapse' + i">
+            <span class="me-2">Volumen {{ volume.volume }}</span>
+            <span class="badge bg-secondary">{{ volume.chapters.length }} {{"CHAPTERS" | translate}}</span>
+          </button>
+        </h2>
+        
+        <div 
+          [id]="'collapse' + i" 
+          class="accordion-collapse collapse" 
+          [class.show]="i === 0"
+          [attr.aria-labelledby]="'heading' + i" 
+          data-bs-parent="#volumeAccordion">
+          <div class="accordion-body p-0">
+            <div class="list-group list-group-flush">
+              <button 
+                *ngFor="let chapter of volume.chapters"
+                class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+                (click)="navigateToChapter(chapter.id)">
+                <div>
+                  <strong>Capítulo {{ chapter.attributes.chapter || '?' }}</strong>
+                  <span *ngIf="chapter.attributes" class="ms-2 text-muted">
+                    {{ chapter.attributes.title }}
+                  </span>
+                </div>
+                <div>
+                  <span class="badge bg-primary me-2">{{ chapter.attributes.language }}</span>
+                  <span class="badge bg-info">{{ chapter.attributes.pages }} páginas</span>
+                </div>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Mensaje cuando no hay capítulos -->
+    <div *ngIf="!loading && volumes.length === 0" class="alert alert-info mt-4" >
+      {{"CHAPTER.NOT_FOUND" | translate}}
+    </div>
+  </div>

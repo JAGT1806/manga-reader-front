@@ -14,3 +14,32 @@ export interface MangaListResponse {
     offset: number;
     total: number;
 }
+
+export interface MangaResponse {
+    data: Manga;
+}
+
+export interface FeedMangaResponse {
+    data: ChapterFeed[];
+    limit: number;
+    offset: number;
+    total: number;
+}
+
+export interface ChapterFeed {
+    id: string;
+    attributes: ChapterAttributes;
+}
+
+export interface ChapterAttributes {
+    volume: string;
+    chapter: string;
+    title: string;
+    language: string;
+    pages: number;
+}
+
+export interface ChapterMangaResponse {
+    data: string[];
+    dataSaver: string[];
+}

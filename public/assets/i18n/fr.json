@@ -1,7 +1,11 @@
 {
+    "CHAPTER.NOT_FOUND": "Chapitre introuvable",
+    "CHAPTER.RELOAD": "Récharger le chapitre",
+    "CHAPTERS": "Chapitres",
     "DARK.MODE": "Mode sombre",
     "DASHBOARD": "Tableau de bord",
     "DATA.SAVER.MODE": "Mode économie de données",
+    "DESCRIPTION.NULL": "Aucune description",
     "ENGLISH": "Anglais",
     "FAVORITES": "Favoris",
     "FRENCH": "Français",
