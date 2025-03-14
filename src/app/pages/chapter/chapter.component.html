@@ -1,0 +1,43 @@
+<!-- chapter.component.html -->
+<div class="controls-bar">
+    <div class="container-fluid">
+        <div class="d-flex justify-content-between align-items-center">
+
+            <div class="d-flex align-items-center gap-3">
+                <select class="reading-mode-select form-select form-select-sm" [(ngModel)]="currentPage"
+                    (change)="scrollToPage(currentPage)" [style.width.px]="100">
+                    <option *ngFor="let page of pages; let i = index" [value]="i">
+                        {{ i + 1 }} / {{ pages.length }}
+                    </option>
+                </select>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="reader-container">
+    <div *ngIf="loading" class="image-loader">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Cargando...</span>
+        </div>
+    </div>
+
+    <div *ngIf="error" class="alert alert-danger m-3">
+        {{ error }}
+    </div>
+
+    <div *ngIf="pages.length > 0" class="chapter-content">
+        <div class="continuous-scroll">
+            <div *ngFor="let page of pages; let i = index" class="page-container" [id]="'page-' + i">
+                <div *ngIf="!loadedPages[i]" class="image-loader">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Cargando página {{ i + 1 }}...</span>
+                    </div>
+                </div>
+                <img [src]="page" [alt]="'Página ' + (i + 1)" [class.loaded]="loadedPages[i]" (load)="onImageLoad(i)"
+                    class="manga-page">
+            </div>
+        </div>
+    </div>
+    <hr>
+</div>

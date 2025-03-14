@@ -119,7 +119,7 @@ export class HeaderComponent implements OnInit {
   
   loadSavedTheme(): void {
     // Cargar tema guardado
-    const savedTheme = localStorage.getItem('theme') || 'light';
+    const savedTheme = this.settingsService.getSettings().theme || 'light';
     document.documentElement.setAttribute('data-bs-theme', savedTheme);
   }
   

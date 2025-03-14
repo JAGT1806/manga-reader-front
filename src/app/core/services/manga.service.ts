@@ -64,7 +64,7 @@ export class MangaService {
   }
 
   getChapter(id: string): Observable<ChapterMangaResponse> {
-    return this.http.get<ChapterMangaResponse>(`${this.apiUrl}/manga/${id}`);
+    return this.http.get<ChapterMangaResponse>(`${this.apiUrl}/manga/chapter/${id}`);
   }
 
   private getFeedRecursive(id: string, offset: number = 0, nsfw: boolean = false): Observable<ChapterFeed[]> {

@@ -1,0 +1,99 @@
+.chapter-content {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.page-container {
+    width: 100%;
+    min-height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loading {
+    opacity: 0;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    transition: opacity 0.3s ease;
+}
+
+.fixed-top {
+    z-index: 1030;
+}
+
+.chapter-content {
+    /* Ajusta el padding superior para que no se oculte contenido bajo la barra fija */
+    padding-top: 60px;
+}
+
+.page-container {
+    /* Elimina cualquier margen o espacio entre imágenes */
+    display: block;
+    line-height: 0;
+    font-size: 0;
+    margin: 0;
+    padding: 0;
+}
+
+.page-container img {
+    /* Asegura que la imagen tome el ancho completo disponible */
+    width: 100%;
+    height: auto;
+    display: block;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.page-container img.loaded {
+    opacity: 1;
+}
+
+/* Estilo para el contenedor principal */
+.reader-container {
+    max-width: 800px;
+    /* o el ancho que prefieras para manhwa */
+    margin: 0 auto;
+    background: #000;
+    /* Fondo negro para mejor contraste */
+}
+
+/* Estilos para la barra de control superior */
+
+/* Estilos para el loader de imágenes */
+.image-loader {
+    position: relative;
+    min-height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #1a1a1a;
+}
+
+.manga-page {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    max-width: 100%;
+    height: auto;
+}
+
+.manga-page.loaded {
+    opacity: 1;
+}
+
+[data-theme="dark"] .manga-page.loaded {
+    filter: brightness(0.85);
+}
+
+[data-theme="light"] .manga-page.loaded {
+    filter: brightness(1);
+}
+
+[data-theme="dark"] .image-loader,
+[data-theme="light"] .image-loader {
+    background: #1a1a1a;
+}
